@@ -87,7 +87,12 @@ class _WatchAndDownloadSeriesState extends State<WatchAndDownloadSeries> {
                     const SizedBox(
                       height: 10,
                     ),
-                    myButton(Icons.download, 'download', context, () {}),
+                    myButton(Icons.download, 'download', context, () async {
+                       await urllancher.canLaunch('')?await urllancher.launch('')
+                        : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("not avilable")));
+                      
+                      },),
                     const SizedBox(
                       height: 50,
                     )

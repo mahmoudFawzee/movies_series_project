@@ -6,8 +6,8 @@ import 'package:netflex_project/screens/one_serie_seasons.dart';
 import 'package:netflex_project/screens/season_eposids.dart';
 import 'package:netflex_project/screens/watching_screen_films.dart';
 import 'package:netflex_project/screens/watching_screen_series.dart';
-import 'package:netflex_project/sub%20parts/down_tab_bar.dart';
 import 'package:netflex_project/sub%20parts/settings.dart';
+import 'package:netflex_project/sub%20parts/splach_screen.dart';
 
 void main() {
   runApp(const HomePage());
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currntTheme,
       routes: {
-        '/': (ctx) => const MyTabBar(),
+        '/': (ctx) => const SplashScreen(),
         OneSerieSeasons.pageRoute: (ctx) => const OneSerieSeasons(),
         SeasonEposids.pageRoute: (ctx) => const SeasonEposids(),
         Favirotes.pageRoute: (ctx) => const Favirotes(),
