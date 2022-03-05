@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:netflex_project/content/film.dart';
 import 'package:netflex_project/content/films_info.dart';
+import 'package:netflex_project/screens/favirote.dart';
+import 'package:netflex_project/sub%20parts/down_tab_bar.dart';
+import 'package:netflex_project/sub%20parts/settings.dart';
 import 'package:url_launcher/url_launcher.dart' as urllancher;
 
-class WatchAndDownloadFilms extends StatelessWidget {
+class WatchAndDownloadFilms extends StatefulWidget {
   const WatchAndDownloadFilms({Key? key}) : super(key: key);
   static const pageRoute = '/filmsWatching';
 
+  @override
+  State<WatchAndDownloadFilms> createState() => _WatchAndDownloadFilmsState();
+}
+
+class _WatchAndDownloadFilmsState extends State<WatchAndDownloadFilms> {
+  void goToHomePage(BuildContext ctx) {
+    Navigator.of(ctx)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => const MyTabBar()));
+  }
   @override
   Widget build(BuildContext context) {
     final routArges =
@@ -17,6 +30,41 @@ class WatchAndDownloadFilms extends StatelessWidget {
       appBar: AppBar(
         title: Text(filmName),
       ),
+      extendBody: true,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            addToFavirotes(myFilms[filmId], Favirotes.favirotesList),
+        backgroundColor: Theme.of(context).backgroundColor,
+        child: Icon(
+          Icons.star_border,
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+          color: Theme.of(context).appBarTheme.backgroundColor,
+          shape: const CircularNotchedRectangle(),
+          child: SizedBox(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  onPressed: () => goToHomePage(context),
+                  icon: const Icon(
+                    Icons.home,
+                    size: 30,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Settings.pageRoute);
+                  },
+                  icon: const Icon(Icons.settings, size: 30),
+                )
+              ],
+            ),
+          )),
       body: SafeArea(
         child: Stack(
           children: [
@@ -109,13 +157,15 @@ class WatchAndDownloadFilms extends StatelessWidget {
                       },),
                     const SizedBox(
                       height: 50,
-                    )
+                    ),
+                    
                   ],
                 ),
               ),
             ),
           ],
         ),
+        
       ),
     );
   }
@@ -140,5 +190,14 @@ class WatchAndDownloadFilms extends StatelessWidget {
         ),
       ),
     );
+  }
+  void addToFavirotes(Film film, List fav) {
+    if (fav.any((element) => film == element)) {
+    } else {
+      fav.add(film);
+    }
+  }
+  void removeFromFavirotes(List faverotes, int id) {
+    faverotes.removeAt(id);
   }
 }

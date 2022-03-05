@@ -80,7 +80,7 @@ class CustomTheme with ChangeNotifier {
           bodyText1: TextStyle(color: Colors.black),
           bodyText2: TextStyle(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20,
           ),
         ));
   }

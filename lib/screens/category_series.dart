@@ -46,7 +46,7 @@ class _SeriesCategoryState extends State<SeriesCategory> {
 
   List filterBySearch(List<MySerie> list, String keyWord) {
     List<MySerie> B = list;
-    B = list.where((element) => element.name.contains(keyWord)).toList();
+    B = list.where((element) => element.name.contains(keyWord.toLowerCase())).toList();
     return B;
   }
 

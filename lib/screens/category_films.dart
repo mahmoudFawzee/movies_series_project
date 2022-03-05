@@ -47,7 +47,7 @@ class _FilmsCategoryState extends State<FilmsCategory> {
 
   List filterBySearch(List<Film> list, String keyWord) {
     List<Film> B = list;
-    B = list.where((element) => element.name.contains(keyWord)).toList();
+    B = list.where((element) => element.name.contains(keyWord.toLowerCase())).toList();
     return B;
   }
 

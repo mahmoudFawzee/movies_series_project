@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflex_project/content/series.dart';
 import 'package:netflex_project/content/series_info.dart';
+import 'package:netflex_project/screens/favirote.dart';
 import 'package:netflex_project/sub%20parts/down_tab_bar.dart';
 import 'package:netflex_project/sub%20parts/drawer.dart';
 import 'package:netflex_project/sub%20parts/settings.dart';
@@ -8,7 +9,7 @@ import 'package:netflex_project/wedgets/series_seasons.dart';
 
 class OneSerieSeasons extends StatefulWidget {
   static const String pageRoute = '/oneSerie';
-  static List<ASerie> favirotesList = [];
+  //static List<ASerie> favirotesList = [];
 
   const OneSerieSeasons({Key? key}) : super(key: key);
 
@@ -112,7 +113,7 @@ class _OneSerieSeasonsState extends State<OneSerieSeasons> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
-            addToFavirotes(allSeries[_serieId], OneSerieSeasons.favirotesList),
+            addToFavirotes(allSeries[_serieId], Favirotes.favirotesList),
         backgroundColor: Theme.of(context).backgroundColor,
         child: Icon(
           Icons.star_border,
