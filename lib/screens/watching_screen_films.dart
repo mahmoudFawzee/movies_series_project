@@ -19,6 +19,9 @@ class _WatchAndDownloadFilmsState extends State<WatchAndDownloadFilms> {
     Navigator.of(ctx)
         .pushReplacement(MaterialPageRoute(builder: (ctx) => const MyTabBar()));
   }
+
+  Color? favIconColor=Colors.grey;
+
   @override
   Widget build(BuildContext context) {
     final routArges =
@@ -33,12 +36,23 @@ class _WatchAndDownloadFilmsState extends State<WatchAndDownloadFilms> {
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            addToFavirotes(myFilms[filmId], Favirotes.favirotesList),
+        onPressed: () {
+          addToFavirotes(myFilms[filmId], Favirotes.favirotesList);
+          if (favIconColor == Colors.grey) {
+            setState(() {
+              favIconColor = Colors.orange;
+            });
+          } else {
+            setState(() {
+              favIconColor = Colors.grey;
+            });
+          }
+        },
         backgroundColor: Theme.of(context).backgroundColor,
         child: Icon(
-          Icons.star_border,
-          color: Theme.of(context).colorScheme.secondary,
+          Icons.star,
+          color: favIconColor,
+          size: 40,
         ),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -141,31 +155,35 @@ class _WatchAndDownloadFilmsState extends State<WatchAndDownloadFilms> {
                       'watch',
                       context,
                       () async {
-                       await urllancher.canLaunch(myFilms[filmId].url)?await urllancher.launch(myFilms[filmId].url)
-                        : ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("not avilable")));
+                        await urllancher.canLaunch(myFilms[filmId].url)
+                            ? await urllancher.launch(myFilms[filmId].url)
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("not avilable")));
                       },
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    myButton(Icons.download, 'download', context, () async {
-                       await urllancher.canLaunch('')?await urllancher.launch('')
-                        : ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("not avilable")));
-                      
-                      },),
+                    myButton(
+                      Icons.download,
+                      'download',
+                      context,
+                      () async {
+                        await urllancher.canLaunch('')
+                            ? await urllancher.launch('')
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("not avilable")));
+                      },
+                    ),
                     const SizedBox(
                       height: 50,
                     ),
-                    
                   ],
                 ),
               ),
             ),
           ],
         ),
-        
       ),
     );
   }
@@ -191,13 +209,12 @@ class _WatchAndDownloadFilmsState extends State<WatchAndDownloadFilms> {
       ),
     );
   }
+
   void addToFavirotes(Film film, List fav) {
     if (fav.any((element) => film == element)) {
+      fav.remove(film);
     } else {
       fav.add(film);
     }
-  }
-  void removeFromFavirotes(List faverotes, int id) {
-    faverotes.removeAt(id);
   }
 }

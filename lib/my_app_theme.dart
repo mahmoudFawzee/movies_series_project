@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
 
+//global variable(objct)from CustomTheme calss
+
 CustomTheme currentTheme = CustomTheme();
 
 class CustomTheme with ChangeNotifier {
   static bool _isDarkTheme = false;
+  //depends on the _isDarkTheme variable we get the currnet theme
   ThemeMode get currntTheme => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
 
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
+    //to make the method listenable in whole the application
     notifyListeners();
   }
 
   String get currentThemeName => _isDarkTheme ? 'dark' : 'light';
 
-  static ThemeData get containerTheme {
-    if (currentTheme.currentThemeName == 'dark') {
-      return ThemeData(
-        backgroundColor: const Color(0xFF693e41),
-      );
-    }
-    return ThemeData(
-      backgroundColor: const Color(0xFF909D43),
-    );
-  }
-
-  static ThemeData get lightTheme {
+ static ThemeData get lightTheme {
     return ThemeData(
         tabBarTheme: const TabBarTheme(
           indicator: BoxDecoration(

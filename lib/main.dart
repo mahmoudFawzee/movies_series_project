@@ -24,7 +24,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    currentTheme.addListener(() {
+    //because it's with changeNotifier class
+    //currentTheme class object 
+    currentTheme.addListener (() {
       setState(() {});
     });
   }
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
-      themeMode: currentTheme.currntTheme,
+      themeMode: currentTheme.currntTheme,  //currentTheme class object .currentTheme method
       routes: {
         '/': (ctx) => const SplashScreen(),
         OneSerieSeasons.pageRoute: (ctx) => const OneSerieSeasons(),

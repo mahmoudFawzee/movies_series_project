@@ -60,14 +60,6 @@ class FaviroteItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
-                Expanded(
-                  child: IconButton(
-                      onPressed: () => removeFromFavirotes(Favirotes.favirotesList,id),
-                      icon: Icon(
-                        Icons.delete,
-                        color: Theme.of(context).colorScheme.secondary,
-                      )),
-                ),
               ],
             ),
           ),
